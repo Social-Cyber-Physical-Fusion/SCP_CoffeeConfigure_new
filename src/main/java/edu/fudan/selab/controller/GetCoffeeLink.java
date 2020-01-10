@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static edu.fudan.selab.globle.Constants.*;
 
@@ -69,7 +73,22 @@ public class GetCoffeeLink {
 
     @RequestMapping(value = "/getcoffeelink", method = RequestMethod.POST)
     public String getLinkbyPOST(HttpServletRequest request) throws Exception{
-        String link = local_url + "/coffee";
+        String uri = "http://127.0.0.1:8002/s/getcoffeelink";//
+        String link = "";
+        String regex = "(?<=://)[a-zA-Z\\.0-9]+(:[0-9]+)?(?=\\/)";//"(?<=\\\\/)[a-zA-Z\\\\.:0-9]+(?=\\\\/)"; // 匹配两个斜杠之间的字符串 /.../
+
+        uri = uri.replaceAll(regex, "");
+        uri = uri.replaceAll("http(s)?://", "");
+        uri = uri.replaceAll("/getcoffeelink", "");
+        String[] split_url = uri.split("\\/");
+        List<String> list = Arrays.asList(split_url);
+
+        if(split_url.length > 0){
+            link = local_url + String.join("/", list) +"/coffee";
+        }else{
+            link = local_url + "/" + war_name +"/coffee";
+        }
+
         //String node_id = "";
         //url_back = request.getParameter("callbackUrl");
 
