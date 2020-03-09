@@ -12,6 +12,6 @@ public class Constants {
     public static String url_back = "";
     public static String userId = "";
     public static String workflow_instance_id = "";
-
+    public static String war_name = "CoffeeConfigure";
     public static String instance_id = "";
 }
