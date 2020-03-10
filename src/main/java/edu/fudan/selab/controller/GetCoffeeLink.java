@@ -52,7 +52,7 @@ public class GetCoffeeLink {
         map.put("nodeId","Human_Machine_Thing-1_PerformSelectCoffeeService");
         map.put("url",link);
         map.put("content","Please select the type of Coffee!");
-        map.put("instance_id", instance_id);
+        map.put("instance_id", workflow_instance_id);
 
         new Thread() {
             public void run() {
@@ -120,7 +120,7 @@ public class GetCoffeeLink {
         map.put("nodeId","Human_Machine_Thing-1_PerformSelectCoffeeService");
         map.put("url",link);
         map.put("content","Please select the type of Coffee!");
-        map.put("instance_id", instance_id);
+        map.put("instance_id", workflow_instance_id);
 
         new Thread() {
             public void run() {
