@@ -20,8 +20,7 @@ import static edu.fudan.selab.globle.Constants.*;
 public class GetCoffeeLink {
     @RequestMapping(value = "/getcoffeelink", method = RequestMethod.GET)
     public String getLink(HttpServletRequest request) throws Exception{
-
-        String uri = request.getRequestURL().toString();//"http://127.0.0.1:8002/s/getcoffeelink";//
+        String uri =  "http://" + request.getHeader("Host")  + request.getRequestURI(); // "http://127.0.0.1:8002/s/getcoffeelink";//
         String link = "";
         String regex = "(?<=://)[a-zA-Z\\.0-9]+(:[0-9]+)?(?=\\/)";//"(?<=\\\\/)[a-zA-Z\\\\.:0-9]+(?=\\\\/)"; // 匹配两个斜杠之间的字符串 /.../
 
@@ -36,6 +35,7 @@ public class GetCoffeeLink {
         }else{
             link = local_url + "/" + war_name +"/coffee";
         }
+        link = local_url + "/" + war_name +"/coffee";
 
         String taskId = request.getParameter("processIdFromApp");
         workflow_instance_id = request.getParameter("workflow_instance_id");
@@ -43,7 +43,7 @@ public class GetCoffeeLink {
         userId = request.getParameter("userId");
 //        System.out.println(userId+"__________________________________________________________________");
         String RedirectApp = SC_url + "/task/saveTaskNodeMessage";
-//        String notifyApp = App_url + "/user/sendMessageToMPOne";
+        String notifyApp = SC_url + "/user/sendMessageToMPOne";
         String FeedBack =  process_proxy_url + "/save_action_operation_self";
 
         Map<String,String> map = new HashMap<String,String>();
@@ -57,7 +57,8 @@ public class GetCoffeeLink {
         new Thread() {
             public void run() {
                 try {
-                    String res = new HttpRequestor().doPost(RedirectApp, map);
+                    //String res = new HttpRequestor().doPost(RedirectApp, map);
+                    String res = new HttpRequestor().doPost(notifyApp, map);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -85,10 +86,7 @@ public class GetCoffeeLink {
 
     @RequestMapping(value = "/getcoffeelink", method = RequestMethod.POST)
     public String getLinkbyPOST(HttpServletRequest request) throws Exception{
-        //String link = local_url + "/coffee";
-        //String node_id = "";
-        //url_back = request.getParameter("callbackUrl");
-        String uri = request.getRequestURL().toString();//"http://127.0.0.1:8002/s/getcoffeelink";//
+        String uri =  "http://" + request.getHeader("Host")  + request.getRequestURI(); // "http://127.0.0.1:8002/s/getcoffeelink";//
         String link = "";
         String regex = "(?<=://)[a-zA-Z\\.0-9]+(:[0-9]+)?(?=\\/)";//"(?<=\\\\/)[a-zA-Z\\\\.:0-9]+(?=\\\\/)"; // 匹配两个斜杠之间的字符串 /.../
 
@@ -103,6 +101,7 @@ public class GetCoffeeLink {
         }else{
             link = local_url + "/" + war_name +"/coffee";
         }
+        link = local_url + "/" + war_name +"/coffee";
 
 
         String taskId = request.getParameter("processIdFromApp");
