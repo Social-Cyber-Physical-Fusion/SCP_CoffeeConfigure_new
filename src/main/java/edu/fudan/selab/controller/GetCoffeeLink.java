@@ -68,7 +68,8 @@ public class GetCoffeeLink {
         Map<String,String> map1 = new HashMap<String,String>();
         map1.put("url", link);
         map1.put("content","Please select the type of Coffee!");
-        map1.put("instance_id", instance_id);
+        map1.put("userId", userId);
+        map1.put("instance_id", workflow_instance_id);
 
         new Thread() {
             public void run() {
@@ -134,7 +135,8 @@ public class GetCoffeeLink {
         Map<String,String> map1 = new HashMap<String,String>();
         map1.put("url", link);
         map1.put("content","Please select the type of Coffee!");
-        map1.put("instance_id", instance_id);
+        map1.put("userId", userId);
+        map1.put("instance_id", workflow_instance_id);
 
         new Thread() {
             public void run() {
